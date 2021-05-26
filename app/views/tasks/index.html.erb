@@ -1,7 +1,9 @@
-<h1>id: <%= @task.id %> のメッセージ詳細ページ</h1>
+<h1>メッセージ一覧</h1>
 
-<p><%= @task.content %></p>
+<ul>
+  <% @tasks.each do |task| %>
+    <li><%= link_to task.id, task%> : <%= task.content %></li>
+  <% end %>
+</ul>
 
-<%= link_to '一覧に戻る', tasks_path %>
-<%= link_to 'このタスクを編集する', edit_task_path(@task) %>
-<%= link_to 'このタスクを削除する', @task, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+<%= link_to '新規タスクメッセージの投稿', new_task_path %>

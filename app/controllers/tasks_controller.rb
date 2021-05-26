@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
     if @task.save
       flash[:success] = 'Taskが正常に投稿されました'
-      redirect_to @Task
+      redirect_to @task
     else
       flash.now[:danger] = 'Taskが投稿されませんでした'
       render :new
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
 
-    if @message.update(task_params)
+    if @task.update(task_params)
       flash[:success] = 'Task は正常に更新されました'
       redirect_to @task
     else
