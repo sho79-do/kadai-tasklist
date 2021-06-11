@@ -4,12 +4,12 @@ class TasksController < ApplicationController
 
   
   def index
-    @tasks = current_user.tasks.all
+    @tasks = Task.all
     
   end
 
   def show
-    @task = Task.find(params[:id])
+   
   end
 
   def new
@@ -18,7 +18,6 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.user_id = current_user.id
     if @task.save
       flash[:success] = 'Taskが正常に投稿されました'
       redirect_to @task
@@ -29,11 +28,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])  
+    
   end
 
   def update
-    @task = Task.find(params[:id])
+    
 
     if @task.update(task_params)
       flash[:success] = 'Task は正常に更新されました'
@@ -45,7 +44,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    
     @task.destroy
 
     flash[:success] = 'Task は正常に削除されました'
@@ -60,7 +59,7 @@ class TasksController < ApplicationController
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])
     unless @task
-      redirect_to login_url
+      redirect_to root_url
     end
   end
 
